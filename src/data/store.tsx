@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-const useStore = create((set) => ({
+const useStore = create(() => ({
     items: [],
     // addItem: (newItem) => set((state) => [...state.items, newItem]),
     // removeAllitems: () => set({ items: [] }),

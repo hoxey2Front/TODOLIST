@@ -1,4 +1,8 @@
-export default function Search({ onChange }) {
+interface SearchProps {
+  onChange: (value: string) => void;
+}
+
+export default function Search({ onChange }: SearchProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value); // 부모에게 전달

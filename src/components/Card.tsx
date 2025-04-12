@@ -1,8 +1,16 @@
 import CheckList from "@/components/CheckList";
 
-export default function Card({ status, items }) {
+interface CardProps {
+  status: "done" | "todo";
+  items: { id: string; name: string; isCompleted: boolean }[];
+}
+
+export default function Card({ status, items }: CardProps) {
   const isDone = status === "done";
-  const filteredItems = items?.filter(item => item.isCompleted === isDone) || [];
+  const filteredItems = items?.filter(item => item.isCompleted === isDone).map(item => ({
+    ...item,
+    name: item.name || "Unnamed Task", // Provide a default name if missing
+  })) || [];
 
   return (
     <div className="flex flex-col items-start justify-start w-full xl:w-1/2 pr-[16px]">
@@ -14,12 +22,12 @@ export default function Card({ status, items }) {
 
       {filteredItems.length > 0 ? (
         filteredItems.map((item) => (
-          <CheckList key={item.id} isDone={isDone} item={item}/>
+          <CheckList key={item.id} isDone={isDone} item={item} />
         ))
       ) : (
         <div className="flex flex-row justify-left items-center w-full h-[50px] my-[10px]">
-          <img src="/images/img/Type=Todo, Size=Large.svg" alt="/images/img/Type=Todo, Size=Large" className={`mx-[10px] ${isDone ? 'hidden' : 'inline'}`}/>
-          <img src="/images/img/Type=Done, Size=Large.svg" alt="/images/img/Type=Done, Size=Large" className={`mx-[10px] ${isDone ? 'inline' : 'hidden'}`}/>
+          <img src="/images/img/Type=Todo, Size=Large.svg" alt="/images/img/Type=Todo, Size=Large" className={`mx-[10px] ${isDone ? 'hidden' : 'inline'}`} />
+          <img src="/images/img/Type=Done, Size=Large.svg" alt="/images/img/Type=Done, Size=Large" className={`mx-[10px] ${isDone ? 'inline' : 'hidden'}`} />
         </div>
       )}
     </div>

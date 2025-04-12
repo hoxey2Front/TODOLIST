@@ -10,7 +10,7 @@ import useStore from "@/data/store";
 export default function Home() {
   const [name, setName] = useState("");
   const localItems = useStore((state) => state.items)
-  
+
   useEffect(() => {
     getTodoItemList();
   }, []);
@@ -31,14 +31,14 @@ export default function Home() {
         <Search onChange={(val) => setName(val)} />
         <div className="w-[16px]"></div>
         <div className="w-[56px] md:w-[162px] xl:w-[168px] bg-no-repeat bg-[length:100%_100%]">
-          <img src="/buttons/Type=Add, Size=Large, State=Default.png" alt="logo_large" className="hidden sm:inline" onClick={addTodoItem}/>
-          <img src="/buttons/Type=Add, Size=Small, State=Default.png" alt="logo_small" className="inline sm:hidden" onClick={addTodoItem}/>
+          <img src="/buttons/Type=Add, Size=Large, State=Default.png" alt="logo_large" className="hidden sm:inline" onClick={addTodoItem} />
+          <img src="/buttons/Type=Add, Size=Small, State=Default.png" alt="logo_small" className="inline sm:hidden" onClick={addTodoItem} />
         </div>
       </div>
 
       <div className="flex flex-wrap justify-center mt-4">
-        <Card status="todo" items={localItems}/>
-        <Card status="done" items={localItems}/>
+        <Card status="todo" items={localItems} />
+        <Card status="done" items={localItems} />
       </div>
     </div>
   );
