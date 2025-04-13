@@ -117,14 +117,14 @@ export default function Test({ params }) {
 
       {/* ✅ 버튼들 (수정하기, 삭제하기) */}
       <div className="w-full flex justify-center xl:justify-end  gap-[10px] mt-[25px]">
-        <button>
+        <button className="cursor-pointer">
           <img
             id="btn_edit_complete"
             src="/buttons/Type=Edit, Size=Large, State=Default.png"
             alt="Type=Edit, Size=Large, State=Default.png"
           />
         </button>
-        <button>
+        <button className="cursor-pointer">
           <img
             src="/buttons/Type=Delete, Size=Large, State=Default.png"
             alt="Type=Delete, Size=Large, State=Default.png"
