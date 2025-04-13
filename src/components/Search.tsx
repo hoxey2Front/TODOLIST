@@ -13,7 +13,7 @@ export default function Search({ onChange }: SearchProps) {
       <input
         type="text"
         placeholder="할 일을 입력해주세요"
-        className="w-full h-full bg-transparent px-2 focus:outline-none"
+        className="w-full h-full pl-[25px] bg-transparent px-2 focus:outline-none"
         onChange={handleChange}
       />
     </div>

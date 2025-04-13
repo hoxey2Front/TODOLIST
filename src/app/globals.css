@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -6,23 +6,41 @@
 }
 
 @theme {
-  --slate-900: #0F172A;
-  --slate-800: #1E293B;
-  --slate-500: #64748B;
-  --slate-400: #94A3B8;
-  --slate-300: #CBD5E1;
-  --slate-200: #E2E8F0;
-  --slate-100: #F1F5F9;
-  --violet-600: #7C3AED;
-  --violet-100: #EDE9FE;
-  --rose-500: #F43F5E;
-  --lime-300: #BEF264;
-  --amber-800: #92400E;
-  --gray-50: #F9FAFB;
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --violet-600: #7c3aed;
+  --violet-100: #ede9fe;
+  --rose-500: #f43f5e;
+  --lime-300: #bef264;
+  --amber-800: #92400e;
+  --gray-50: #f9fafb;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.scrollbar {
+  overflow-y: scroll; /*  */
+}
+
+/* 스크롤바의 폭 너비 */
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-amber-200); /* 스크롤바 색상 */
+  border-radius: 10px; /* 스크롤바 둥근 테두리 */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: transparent; /*스크롤바 뒷 배경 색상*/
 }

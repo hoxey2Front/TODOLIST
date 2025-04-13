@@ -25,9 +25,19 @@ export default function Card({ status, items }: CardProps) {
           <CheckList key={item.id} isDone={isDone} item={item} />
         ))
       ) : (
-        <div className="flex flex-row justify-left items-center w-full h-[50px] my-[10px]">
-          <img src="/images/img/Type=Todo, Size=Large.svg" alt="/images/img/Type=Todo, Size=Large" className={`mx-[10px] ${isDone ? 'hidden' : 'inline'}`} />
-          <img src="/images/img/Type=Done, Size=Large.svg" alt="/images/img/Type=Done, Size=Large" className={`mx-[10px] ${isDone ? 'inline' : 'hidden'}`} />
+        <div className="flex flex-row justify-center items-center w-full min-h-[250px] my-[10px]">
+          <div className={`mx-[10px] text-center ${isDone ? 'hidden' : 'inline'}`}>
+            <img src="/images/img/Type=Todo, Size=Large.svg" alt="/images/img/Type=Todo, Size=Large" />
+            <p className="text-[16px] font-[700] text-slate-400">할 일이 없어요.<br />
+              TODO를 새롭게 추가해주세요!</p>
+          </div>
+          <div className={`mx-[10px] text-center ${isDone ? 'inline' : 'hidden'}`}>
+            <img src="/images/img/Type=Done, Size=Large.svg" alt="/images/img/Type=Done, Size=Large" />
+            <p className="text-[16px] font-[700] text-slate-400">
+              아직 다 한 일이 없어요.<br />
+              해야 할 일을 체크해보세요!
+            </p>
+          </div>
         </div>
       )}
     </div>
