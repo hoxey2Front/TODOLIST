@@ -1,7 +1,7 @@
 // 컴포넌트 맨 위에 추가
 'use client';
 
-import { useEffect, use } from 'react';
+import { useEffect, use, useState } from 'react';
 import { getItem } from '@/lib/api';
 import useStore from '@/data/store';
 
@@ -9,6 +9,7 @@ export default function Test({ params }) {
   const { itemId } = use(params);
   const item = useStore(state => state.item);
   const toggleCompleted = useStore(state => state.toggleCompleted);
+  const [isFiled, setIsFiled] = useState(false);
 
   // ✅ textarea 높이 자동 조절 함수
   const autoResize = el => {
@@ -55,7 +56,11 @@ export default function Test({ params }) {
 
       {/* ✅ 이미지 섹션 */}
       <div className="flex flex-col xl:flex-row justify-center mt-[25px] gap-[25px]">
-        <div className="flex flex-col items-start justify-start w-full xl:w-[384px] h-[311px] bg-slate-50 bg-[url('/images/ic/img.png')] bg-no-repeat bg-center border-slate-300 border-2 border-dashed rounded-[24px] relative">
+        <div
+          className={`flex flex-col items-start justify-start w-full xl:w-[384px] h-[311px] bg-slate-50 bg-[url('/images/ic/img.png')] bg-no-repeat bg-center ${
+            isFiled ? 'border-transparent' : 'border-slate-300'
+          } border-2 border-dashed rounded-[24px] relative`}
+        >
           <label
             htmlFor="file"
             className="bg-[url('/buttons/Type=Plus.png')] bg-no-repeat bg-center w-[70px] h-[70px] absolute bottom-[24px] right-[24px] cursor-pointer z-10"
@@ -96,13 +101,14 @@ export default function Test({ params }) {
                   }
                 };
                 reader.readAsDataURL(file);
+                setIsFiled(true);
               }
             }}
           />
         </div>
 
         {/* ✅ 메모 섹션 */}
-        <div className="flex flex-col items-center justify-center w-full xl:w-[588px] h-[311px] border-slate-300 border-2 rounded-[24px] bg-[url('/images/img/memo.png')] relative">
+        <div className="flex flex-col items-center justify-center w-full xl:w-[588px] h-[311px]   rounded-[24px] bg-[url('/images/img/memo.png')] relative">
           <p className="text-[16px] text-amber-800 font-[800] absolute top-[24px]">Memo</p>
 
           {/* ✅ 자동 높이 조절되는 textarea */}
