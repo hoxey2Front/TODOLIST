@@ -1,5 +1,5 @@
-'use client'
-import Search from "@/components/Search"
+'use client';
+import Search from '@/components/Search';
 import { useState } from 'react';
 import useStore from '@/data/store';
 import { addItem } from '@/lib/api';
@@ -36,7 +36,7 @@ function Header() {
         />
       </div>
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;

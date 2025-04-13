@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "src/app/page.jsx",
     "src/components/CheckList.jsx",
-    "src/app/items/[itemId]/page.jsx"
+    "src/app/items/[itemId]/page.jsx",
+    "src/components/Header.ㅓsx"
   ],
   "exclude": ["node_modules"]
 }
