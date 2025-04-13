@@ -30,7 +30,7 @@ export default function Test({ params }) {
   };
 
   return (
-    <div className="px-[102px] py-[24px]">
+    <div className="px-[24px] xl:px-[102px] py-[24px]">
       {item.isCompleted ? (
         <div className="border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
           <img
