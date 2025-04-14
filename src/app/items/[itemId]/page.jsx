@@ -46,7 +46,10 @@ export default function Test({ params }) {
             src="/icons/ic/Property 1=Frame 2610233.svg"
             alt="Property 1=Frame 2610233"
             className="mx-[10px]"
-            onClick={toggleChecked}
+            onClick={() => {
+              setIsChanged(true);
+              toggleChecked();
+            }}
           />
           <input
             className="text-slate-900 text-[20px] font-bold underline text-center"
