@@ -41,7 +41,11 @@ export default function Test({ params }) {
     <div className="px-[24px] pc:px-[102px] py-[24px]">
       {/* ✅ 체크리스트 이름 섹션 */}
       {item.isCompleted ? (
+<<<<<<< HEAD
         <div className="bg-violet-100 border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center gap-2">
+=======
+        <div className="bg-violet-100 border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
+>>>>>>> e1f8b168db5db9ebf7549884d69a2fc2e086bb3a
           <img
             src="/icons/ic/Property 1=Frame 2610233.svg"
             alt="Property 1=Frame 2610233"
@@ -63,7 +67,11 @@ export default function Test({ params }) {
           />
         </div>
       ) : (
+<<<<<<< HEAD
         <div className="bg-white border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center gap-2">
+=======
+        <div className="bg-white border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
+>>>>>>> e1f8b168db5db9ebf7549884d69a2fc2e086bb3a
           <img
             src="/icons/ic/Property 1=Default.svg"
             alt="Property 1=Frame 2610233"
