@@ -33,7 +33,7 @@ export default function Test({ params }) {
   return (
     <div className="px-[24px] xl:px-[102px] py-[24px]">
       {item.isCompleted ? (
-        <div className="border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
+        <div className="bg-violet-100 border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
           <img
             src="/icons/ic/Property 1=Frame 2610233.svg"
             alt="Property 1=Frame 2610233"
@@ -43,7 +43,7 @@ export default function Test({ params }) {
           <span className="text-slate-900 text-[20px] font-bold underline">{item.name}</span>
         </div>
       ) : (
-        <div className="border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
+        <div className="bg-white border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
           <img
             src="/icons/ic/Property 1=Default.svg"
             alt="Property 1=Frame 2610233"
