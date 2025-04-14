@@ -17,9 +17,9 @@ const CheckList = ({ isDone, item }) => {
   };
 
   return (
-    <div className="flex flex-row justify-left items-center border-2 border-slate-900 rounded-full w-full h-[50px] my-[10px]">
+    <div className={`${isDone ? 'bg-violet-100' : 'bg-white'}flex flex-row justify-left items-center border-2 border-slate-900 rounded-full w-full h-[50px] my-[10px]`}>
       {isDone ? (
-        <div className="flex flex-row items-center bg-violet-100">
+        <div className="flex flex-row items-center">
           <img
             src="/icons/ic/Property 1=Frame 2610233.svg"
             alt="Property 1=Frame 2610233"
@@ -34,7 +34,7 @@ const CheckList = ({ isDone, item }) => {
           </Link>
         </div>
       ) : (
-        <div className="flex flex-row items-center bg-white">
+        <div className="flex flex-row items-center">
           <img
             src="/icons/ic/Property 1=Default.svg"
             alt="Property 1=Default"
