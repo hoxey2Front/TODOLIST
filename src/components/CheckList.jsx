@@ -34,7 +34,7 @@ const CheckList = ({ isDone, item }) => {
           </Link>
         </div>
       ) : (
-        <div className="flex flex-row items-center">
+        <div className="w-full h-full bg-white flex flex-row items-center">
           <img
             src="/icons/ic/Property 1=Default.svg"
             alt="Property 1=Default"
