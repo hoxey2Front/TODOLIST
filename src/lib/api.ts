@@ -42,7 +42,7 @@ export async function getItem(itemId: string): Promise<Item> {
   return res.json();
 }
 
-export async function updateItem(itemId: string, isCompleted: boolean): Promise<Item> {
+export async function updateListItem(itemId: string, isCompleted: boolean): Promise<Item> {
   const item = await getItem(itemId);
   const res = await fetch(`${BASE_URL}/items/${itemId}`, {
     method: 'PATCH',
@@ -51,6 +51,28 @@ export async function updateItem(itemId: string, isCompleted: boolean): Promise<
       name: item.name || '',
       memo: item.memo || '',
       imageUrl: item.imageUrl || '',
+      isCompleted: isCompleted,
+    }),
+  });
+
+  return res.json();
+}
+
+export async function updateDetailItem(
+  itemId: string,
+  name: string | '',
+  memo: string | '',
+  imageUrl: string | '',
+  isCompleted: boolean
+): Promise<Item> {
+  // const item = await getItem(itemId);
+  const res = await fetch(`${BASE_URL}/items/${itemId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name,
+      memo,
+      imageUrl,
       isCompleted: isCompleted,
     }),
   });

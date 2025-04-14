@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Card from '@/components/Card';
 import { getItemList } from '@/lib/api';
 import useStore from '@/data/store';
-import Header from '@/components/Header';
+import SearchBar from '@/components/SearchBar';
 
 export default function Home() {
   const localItems = useStore(state => state.items);
@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <div>
-      <Header />
+      <SearchBar />
       <div className="flex flex-wrap justify-center mt-4">
         <Card
           status="todo"

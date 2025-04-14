@@ -5,7 +5,7 @@ import useStore from '@/data/store';
 import { addItem } from '@/lib/api';
 import { getItemList } from '@/lib/api';
 
-function Header() {
+function SearchBar() {
   const [name, setName] = useState('');
 
   const getTodoItemList = async () => {
@@ -17,26 +17,34 @@ function Header() {
     await addItem({ name });
     await getTodoItemList();
   };
+  const handleAddTodoItem = async () => {
+    if (!name.trim()) {
+      alert('값을 입력해주세요.');
+      return;
+    }
+    await addTodoItem();
+  };
+
   return (
-    <div className="flex flex-row py-[2px] h-[60px]">
+    <div className="flex flex-row py-[2px] h-[60px] mob:pl-[16px] mob:pr-[15px] tab:px-24px">
       <Search onChange={val => setName(val)} />
       <div className="w-[16px]"></div>
-      <div className="w-[56px] md:w-[162px] xl:w-[168px] bg-no-repeat bg-[length:100%_100%]">
+      <div className="w-[56px] tab:w-[162px] pc:w-[168px] bg-no-repeat bg-[length:100%_100%] bg-[url('/images/img/search.png')">
         <img
           src="/buttons/Type=Add, Size=Large, State=Default.png"
           alt="logo_large"
-          className="hidden sm:inline"
-          onClick={addTodoItem}
+          className="h-full hidden mob:inline cursor-pointer"
+          onClick={handleAddTodoItem}
         />
         <img
           src="/buttons/Type=Add, Size=Small, State=Default.png"
           alt="logo_small"
-          className="inline sm:hidden"
-          onClick={addTodoItem}
+          className="h-full inline mob:hidden cursor-pointer"
+          onClick={handleAddTodoItem}
         />
       </div>
     </div>
   );
 }
 
-export default Header;
+export default SearchBar;

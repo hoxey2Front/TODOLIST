@@ -2,7 +2,8 @@
 'use client';
 
 import { useEffect, use, useState } from 'react';
-import { getItem } from '@/lib/api';
+import { useRouter } from 'next/navigation';
+import { addImage, deleteItem, getItem, updateDetailItem } from '@/lib/api';
 import useStore from '@/data/store';
 
 export default function Test({ params }) {
@@ -10,12 +11,8 @@ export default function Test({ params }) {
   const item = useStore(state => state.item);
   const toggleCompleted = useStore(state => state.toggleCompleted);
   const [isFiled, setIsFiled] = useState(false);
-
-  // ✅ textarea 높이 자동 조절 함수
-  const autoResize = el => {
-    el.style.height = 'auto';
-    el.style.height = el.scrollHeight + 'px';
-  };
+  const [isChanged, setIsChanged] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     getTodoItem(itemId);
@@ -26,44 +23,85 @@ export default function Test({ params }) {
     useStore.setState({ item: res });
   };
 
+  const setTodoItem = async () => {
+    await addImage(item.imageUrl);
+    await updateDetailItem(item.id, item.name, item.memo, item.imageUrl, item.isCompleted);
+  };
+
+  const deleteTodoItem = async itemId => {
+    console.log(`Item ID: ${itemId} deleted`);
+    await deleteItem(itemId);
+    router.push('/');
+  };
+
   const toggleChecked = () => {
     toggleCompleted();
   };
-
   return (
-    <div className="px-[24px] xl:px-[102px] py-[24px]">
+    <div className="px-[24px] pc:px-[102px] py-[24px]">
+      {/* ✅ 체크리스트 이름 섹션 */}
       {item.isCompleted ? (
-        <div className="border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
+        <div className="bg-violet-100 border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center gap-2">
           <img
             src="/icons/ic/Property 1=Frame 2610233.svg"
             alt="Property 1=Frame 2610233"
             className="mx-[10px]"
             onClick={toggleChecked}
           />
-          <span className="text-slate-900 text-[20px] font-bold underline">{item.name}</span>
+          <input
+            className="text-slate-900 text-[20px] font-bold underline text-center"
+            value={item.name || ''}
+            onChange={e => {
+              useStore.setState({
+                item: {
+                  ...item,
+                  name: e.target.value,
+                },
+              });
+              setIsChanged(true);
+            }}
+          />
         </div>
       ) : (
-        <div className="border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
+        <div className="bg-white border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center gap-2">
           <img
             src="/icons/ic/Property 1=Default.svg"
             alt="Property 1=Frame 2610233"
             className="mx-[10px]"
             onClick={toggleChecked}
           />
-          <span className="text-slate-900 text-[20px] font-bold underline">{item.name}</span>
+          <input
+            className="text-slate-900 text-[20px] font-bold underline text-center"
+            value={item.name || ''}
+            onChange={e => {
+              useStore.setState({
+                item: {
+                  ...item,
+                  name: e.target.value,
+                },
+              });
+              setIsChanged(true);
+            }}
+          />
         </div>
       )}
 
       {/* ✅ 이미지 섹션 */}
-      <div className="flex flex-col xl:flex-row justify-center mt-[25px] gap-[25px]">
+      <div className="flex flex-col pc:flex-row justify-center mt-[25px] gap-[25px]">
         <div
-          className={`flex flex-col items-start justify-start w-full xl:w-[384px] h-[311px] bg-slate-50 bg-[url('/images/ic/img.png')] bg-no-repeat bg-center ${
+          className={`flex flex-col items-start justify-start w-full pc:w-[384px] h-[311px] bg-slate-50 bg-[url(${
+            item.imageUrl ? item.imageUrl : '/images/ic/img.png'
+          })] bg-no-repeat bg-center ${
             isFiled ? 'border-transparent' : 'border-slate-300'
           } border-2 border-dashed rounded-[24px] relative`}
         >
           <label
             htmlFor="file"
-            className="bg-[url('/buttons/Type=Plus.png')] bg-no-repeat bg-center w-[70px] h-[70px] absolute bottom-[24px] right-[24px] cursor-pointer z-10"
+            className={`${
+              item.imageUrl
+                ? "bg-[url('/buttons/Type=Edit.png')]"
+                : "bg-[url('/buttons/Type=Plus.png')]"
+            } bg-no-repeat bg-center w-[70px] h-[70px] absolute bottom-[24px] right-[24px] cursor-pointer z-10`}
           />
           <input
             type="file"
@@ -94,43 +132,67 @@ export default function Test({ params }) {
                   const label = container?.querySelector('label');
                   if (label) {
                     label.style.backgroundImage = "url('/buttons/Type=Edit.png')";
-                    const editButton = document.getElementById('btn_edit_complete');
-                    if (editButton) {
-                      editButton.src = '/buttons/Type=Edit, Size=Large, State=Active.png';
-                    }
                   }
                 };
                 reader.readAsDataURL(file);
                 setIsFiled(true);
+                useStore.setState({
+                  item: {
+                    ...item,
+                    imageUrl: e.target.value,
+                  },
+                });
+                setIsChanged(true);
               }
             }}
           />
         </div>
 
         {/* ✅ 메모 섹션 */}
-        <div className="flex flex-col items-center justify-center w-full xl:w-[588px] h-[311px]   rounded-[24px] bg-[url('/images/img/memo.png')] relative">
+        <div className="flex flex-col items-center justify-center w-full pc:w-[588px] h-[311px] px-[16px] pt-[58px] pb-[24px] rounded-[24px] bg-[url('/images/img/memo.png')] relative">
           <p className="text-[16px] text-amber-800 font-[800] absolute top-[24px]">Memo</p>
 
           {/* ✅ 자동 높이 조절되는 textarea */}
           <textarea
-            onInput={e => autoResize(e.target)}
-            className="w-full max-h-[200px] min-h-[40px] leading-tight p-2 resize-none outline-none break-words whitespace-pre-wrap
-            text-[16px] font-[400] text-center bg-transparent scrollbar"
+            value={item.memo || ''}
+            onChange={e => {
+              useStore.setState({
+                item: {
+                  ...item,
+                  memo: e.target.value,
+                },
+              });
+              setIsChanged(true);
+            }}
+            className="w-full max-h-[229px] leading-tight resize-none outline-none break-words whitespace-pre-wrap
+            text-[16px] font-[400] text-slate-900 text-center bg-transparent scrollbar"
             placeholder="여기에 메모를 입력하세요..."
           />
         </div>
       </div>
 
       {/* ✅ 버튼들 (수정하기, 삭제하기) */}
-      <div className="w-full flex justify-center xl:justify-end  gap-[10px] mt-[25px]">
+      <div className="w-full flex justify-center pc:justify-end  gap-[10px] mt-[25px]">
         <button className="cursor-pointer">
           <img
             id="btn_edit_complete"
-            src="/buttons/Type=Edit, Size=Large, State=Default.png"
+            src={`${
+              isChanged
+                ? '/buttons/Type=Edit, Size=Large, State=Active.png'
+                : '/buttons/Type=Edit, Size=Large, State=Default.png'
+            }`}
             alt="Type=Edit, Size=Large, State=Default.png"
+            disabled={!isChanged}
+            onClick={() => {
+              setTodoItem(item.id, item.name, item.memo, item.imageUrl, item.isCompleted);
+              setIsChanged(false);
+            }}
           />
         </button>
-        <button className="cursor-pointer">
+        <button
+          className="cursor-pointer"
+          onClick={() => deleteTodoItem(item.id)}
+        >
           <img
             src="/buttons/Type=Delete, Size=Large, State=Default.png"
             alt="Type=Delete, Size=Large, State=Default.png"

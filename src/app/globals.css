@@ -17,8 +17,11 @@
   --violet-100: #ede9fe;
   --rose-500: #f43f5e;
   --lime-300: #bef264;
-  --amber-800: #92400e;
-  --gray-50: #f9fafb;
+
+  /* Breakpoint settings */
+  --breakpoint-mob: 375px;
+  --breakpoint-tab: 744px;
+  --breakpoint-pc: 1920px;
 }
 
 body {
