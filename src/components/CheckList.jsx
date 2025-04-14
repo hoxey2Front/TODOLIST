@@ -17,7 +17,7 @@ const CheckList = ({ isDone, item }) => {
   };
 
   return (
-    <div className={`${isDone ? 'bg-violet-100' : 'bg-white'}flex flex-row justify-left items-center border-2 border-slate-900 rounded-full w-full h-[50px] my-[10px]`}>
+    <div className="flex flex-row justify-left items-center border-2 border-slate-900 rounded-full w-full h-[50px] my-[10px]">
       {isDone ? (
         <div className="flex flex-row items-center">
           <img
