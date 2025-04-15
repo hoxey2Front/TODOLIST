@@ -32,8 +32,14 @@ export default function Test({ params }) {
   };
 
   const setTodoItem = async () => {
-    const res = await addImage(currentImage);
-    await updateDetailItem(item.id, item.name, item.memo, res.url, item.isCompleted);
+    let res;
+    let imageUrl = item.imageUrl;
+    if (currentImage) {
+      res = await addImage(currentImage);
+      imageUrl = res.url;
+    }
+    console.log(imageUrl);
+    await updateDetailItem(item.id, item.name, item.memo, imageUrl, item.isCompleted);
   };
 
   const deleteTodoItem = async itemId => {
@@ -53,7 +59,6 @@ export default function Test({ params }) {
             src="/icons/ic/Property 1=Frame 2610233.svg"
             alt="Property 1=Frame 2610233"
             onClick={() => {
-              setIsChanged(true);
               toggleChecked();
             }}
           />
@@ -203,11 +208,11 @@ export default function Test({ params }) {
             alt="Type=Edit, Size=Large, State=Default.png"
             disabled={!isChanged}
             onClick={() => {
-              if (isChanged) {
-                setTodoItem(item.id, item.name, item.memo, item.imageUrl, item.isCompleted);
-                setIsChanged(false);
-                alert('수정되었습니다.');
-              }
+              // if (isChanged) {
+              setTodoItem(item.id, item.name, item.memo, item.imageUrl, item.isCompleted);
+              setIsChanged(false);
+              alert('수정되었습니다.');
+              // }
             }}
           />
         </button>
