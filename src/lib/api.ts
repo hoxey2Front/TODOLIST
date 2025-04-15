@@ -65,7 +65,7 @@ export async function updateDetailItem(
   imageUrl: string | '',
   isCompleted: boolean
 ): Promise<Item> {
-  // const item = await getItem(itemId);
+  console.log('updateDetailItem', itemId, name, memo, imageUrl, isCompleted);
   const res = await fetch(`${BASE_URL}/items/${itemId}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
@@ -90,12 +90,14 @@ export async function deleteItem(itemId: string): Promise<{ success: boolean }> 
   return res.json();
 }
 
-export async function addImage(): Promise<ImageResponse> {
+export async function addImage(image: File): Promise<{ success: string }> {
+  const formData = new FormData();
+  formData.append('image', image);
   const res = await fetch(`${BASE_URL}/images/upload`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ title: '새 아이템', desc: '설명' }),
+    // headers: { 'Content-Type': 'application/json' },
+    body: formData,
   });
-
-  return res.json();
+  const result = await res.json();
+  return result;
 }
