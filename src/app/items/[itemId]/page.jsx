@@ -14,23 +14,35 @@ export default function Test({ params }) {
   const [isChanged, setIsChanged] = useState(false);
   const [isFiled, setIsFiled] = useState(false);
   const [rows, setRows] = useState(1);
+  const [loading, setLoading] = useState(true); // Skeleton loading state
   const router = useRouter();
 
   useEffect(() => {
     getTodoItem(itemId).then(() => {
+      {
+        /* ✅ 자동너비 조절하는 투두리스트 제목(input) */
+      }
       const item = useStore.getState().item;
       const lineBreaks = (item.memo?.match(/\n/g) || []).length + 1;
       const newRows = Math.max(lineBreaks, Math.ceil(item.memo?.length / 50));
       setRows(newRows);
+      setLoading(false); // Stop loading after data is fetched
     });
   }, []);
 
+  /* ✅ itemId로 아이템 정보 불러오기 */
   const getTodoItem = async itemId => {
     const res = await getItem(itemId);
     useStore.setState({ item: res });
     setIsFiled(res.imageUrl);
   };
 
+  // ✅ 할 일 진행중/ 완료 변경하기
+  const toggleChecked = () => {
+    toggleCompleted();
+  };
+
+  /* ✅ 수정완료 버튼 눌러 업데이트 */
   const setTodoItem = async () => {
     let res;
     let imageUrl = item.imageUrl;
@@ -42,18 +54,35 @@ export default function Test({ params }) {
     await updateDetailItem(item.id, item.name, item.memo, imageUrl, item.isCompleted);
   };
 
+  /* ✅ 삭제하기 버튼 눌러 삭제 */
   const deleteTodoItem = async itemId => {
     await deleteItem(itemId);
     router.push('/');
   };
 
-  const toggleChecked = () => {
-    toggleCompleted();
-  };
+  /* ✅ 화면 로드시 Skeleton UI 적용 */
+  if (loading) {
+    return (
+      <div className="px-[24px] pc:px-[102px] py-[24px]">
+        <div className="animate-pulse">
+          <div className="bg-gray-300 rounded-[24px] w-full h-[64px] mb-[25px]"></div>
+          <div className="flex flex-col pc:flex-row justify-center gap-[25px]">
+            <div className="bg-gray-300 rounded-[24px] w-full pc:w-[384px] h-[311px]"></div>
+            <div className="bg-gray-300 rounded-[24px] w-full pc:w-[588px] h-[311px]"></div>
+          </div>
+          <div className="flex justify-center pc:justify-end gap-[10px] mt-[25px]">
+            <div className="bg-gray-300 rounded-[24px] w-[168px] h-[56px]"></div>
+            <div className="bg-gray-300 rounded-[24px] w-[168px] h-[56px]"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="px-[24px] pc:px-[102px] py-[24px]">
-      {/* ✅ 체크리스트 이름 섹션 */}
       {item.isCompleted ? (
+        /* ✅ 투두리스트 완료시 */
         <div className="bg-violet-100 border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
           <img
             src="/icons/ic/Property 1=Frame 2610233.svg"
@@ -62,6 +91,7 @@ export default function Test({ params }) {
               toggleChecked();
             }}
           />
+          {/* ✅ 투두리스트 제목 */}
           <input
             className="min-w-[100px] text-slate-900 text-[20px] text-center font-bold underline focus:outline-none focus:ring-0 focus:border-transparent"
             value={item.name || ''}
@@ -78,12 +108,14 @@ export default function Test({ params }) {
           />
         </div>
       ) : (
+        /* ✅ 투두리스트 진행중일시 */
         <div className="bg-white border-2 border-slate-900 rounded-[24px] p-4 w-full h-[64px] flex items-center justify-center">
           <img
             src="/icons/ic/Property 1=Default.svg"
             alt="Property 1=Frame 2610233"
             onClick={toggleChecked}
           />
+          {/* ✅ 투두리스트 제목 */}
           <input
             className="min-w-[100px] text-slate-900 text-[20px] text-center font-bold underline focus:outline-none focus:ring-0 focus:border-transparent"
             value={item.name || ''}
@@ -101,7 +133,7 @@ export default function Test({ params }) {
         </div>
       )}
 
-      {/* ✅ 이미지 섹션 */}
+      {/* ✅ 투두리스트 이미지 */}
       <div className="flex flex-col pc:flex-row justify-center mt-[25px] gap-[25px]">
         <div
           className={`flex flex-col items-start justify-start w-full pc:w-[384px] h-[311px] bg-no-repeat bg-center  ${
@@ -147,7 +179,9 @@ export default function Test({ params }) {
               reader.onload = event => {
                 const container = e.target.closest('div');
                 let previewImage = container?.querySelector('img');
-
+                {
+                  /* ✅ 이미지 입력시 미리보기*/
+                }
                 if (!previewImage) {
                   previewImage = document.createElement('img');
                   previewImage.className =
@@ -169,7 +203,7 @@ export default function Test({ params }) {
           />
         </div>
 
-        {/* ✅ 메모 섹션 */}
+        {/* ✅ 투두리스트 메모 */}
         <div className="flex flex-col items-center justify-center w-full pc:w-[588px] h-[311px] px-[16px] pt-[58px] pb-[24px] rounded-[24px] bg-[url('/images/img/memo.png')] relative">
           <p className="text-[16px] text-amber-800 font-[800] absolute top-[24px]">Memo</p>
           {/* ✅ 자동 높이 조절되는 textarea (메모)*/}
@@ -195,12 +229,13 @@ export default function Test({ params }) {
         </div>
       </div>
 
-      {/* ✅ 버튼들 (수정하기, 삭제하기) */}
       <div className="w-full flex justify-center pc:justify-end  gap-[10px] mt-[25px]">
+        {/* ✅ 수정완료 버튼 */}
         <button className="cursor-pointer">
           <img
             id="btn_edit_complete"
             src={`${
+              /* ✅ 내용 바뀔시 이미지 변경(색상) */
               isChanged
                 ? '/buttons/Type=Edit, Size=Large, State=Active.png'
                 : '/buttons/Type=Edit, Size=Large, State=Default.png'
@@ -208,14 +243,16 @@ export default function Test({ params }) {
             alt="Type=Edit, Size=Large, State=Default.png"
             disabled={!isChanged}
             onClick={() => {
-              // if (isChanged) {
-              setTodoItem(item.id, item.name, item.memo, item.imageUrl, item.isCompleted);
-              setIsChanged(false);
-              alert('수정되었습니다.');
-              // }
+              if (isChanged) {
+                setTodoItem(item.id, item.name, item.memo, item.imageUrl, item.isCompleted);
+                setIsChanged(false);
+                alert('수정되었습니다.');
+                router.push('/');
+              }
             }}
           />
         </button>
+        {/* ✅ 삭제하기 버튼 */}
         <button
           className="cursor-pointer"
           onClick={() => {

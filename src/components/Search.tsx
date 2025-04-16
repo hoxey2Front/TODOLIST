@@ -4,14 +4,16 @@ interface SearchProps {
   onEnter?: () => void; // ⬅️ Enter 키 처리용
 }
 
+// ✅ 할일 입력 input
 export default function Search({ value, onChange, onEnter }: SearchProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
 
+  // ⬅️ Enter 키 눌러서 할 일 추가 가능
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      onEnter?.(); // ⬅️ Enter 키 누르면 실행
+      onEnter?.();
     }
   };
 

@@ -13,7 +13,6 @@ export default function Card({ status, items }: CardProps) {
   })) || [];
 
   return (
-    // <div className="flex flex-col items-start justify-start w-full pc:w-1/2 pr-[16px]">
     <div className="flex flex-col items-start justify-start w-full pc:w-1/2 mob:pl-[16px] mob:pr-[15px] tab:px-24px">
       <img
         src={isDone ? '/images/img/done.png' : '/images/img/todo.png'}

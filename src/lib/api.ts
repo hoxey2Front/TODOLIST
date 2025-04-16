@@ -14,6 +14,9 @@ export interface ImageResponse {
   url: string;
 }
 
+// ✅ Swagger API 주소를 사용하여 함수 생성
+
+// ✅ 할 일 추가 기능
 export async function addItem(item: Item): Promise<Item> {
   const res = await fetch(`${BASE_URL}/items`, {
     method: 'POST',
@@ -24,6 +27,7 @@ export async function addItem(item: Item): Promise<Item> {
   return res.json();
 }
 
+// ✅ 할 일 목록 가져오기 기능
 export async function getItemList(): Promise<Item[]> {
   const res = await fetch(`${BASE_URL}/items`, {
     method: 'GET',
@@ -33,6 +37,7 @@ export async function getItemList(): Promise<Item[]> {
   return res.json();
 }
 
+// ✅ 한개의 할 일 가져오기 기능 (상세페이지용)
 export async function getItem(itemId: string): Promise<Item> {
   const res = await fetch(`${BASE_URL}/items/${itemId}`, {
     method: 'GET',
@@ -42,6 +47,7 @@ export async function getItem(itemId: string): Promise<Item> {
   return res.json();
 }
 
+// ✅ 할 일 목록 업데이트 기능
 export async function updateListItem(itemId: string, isCompleted: boolean): Promise<Item> {
   const item = await getItem(itemId);
   const res = await fetch(`${BASE_URL}/items/${itemId}`, {
@@ -58,6 +64,7 @@ export async function updateListItem(itemId: string, isCompleted: boolean): Prom
   return res.json();
 }
 
+// ✅ 할 일 상세정보 업데이트 기능
 export async function updateDetailItem(
   itemId: string,
   name: string | '',
@@ -80,6 +87,7 @@ export async function updateDetailItem(
   return res.json();
 }
 
+// ✅ 할 일 삭제 기능
 export async function deleteItem(itemId: string): Promise<{ success: boolean }> {
   const res = await fetch(`${BASE_URL}/items/${itemId}`, {
     method: 'DELETE',
@@ -90,6 +98,7 @@ export async function deleteItem(itemId: string): Promise<{ success: boolean }> 
   return res.json();
 }
 
+// ✅ 이미지 업로드용 (상세페이지 이미지) / 주소를  return함
 export async function addImage(image: File): Promise<{ success: string }> {
   const formData = new FormData();
   formData.append('image', image);

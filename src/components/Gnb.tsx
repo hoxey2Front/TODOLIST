@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+// Gnb, navigation bar
 function Gnb() {
   return (
     <header className="h-[60px] flex items-center mob:pl-[16px] mob:pr-[15px] tab:px-24px">
