@@ -88,6 +88,7 @@ export default function ItemDetail({ params }) {
             alt="Property 1=Frame 2610233"
             onClick={() => {
               toggleChecked();
+              setIsChanged(!isChanged);
             }}
           />
           {/* ✅ 투두리스트 제목 */}
@@ -112,7 +113,10 @@ export default function ItemDetail({ params }) {
           <img
             src="/icons/ic/Property 1=Default.svg"
             alt="Property 1=Frame 2610233"
-            onClick={toggleChecked}
+            onClick={() => {
+              toggleChecked();
+              setIsChanged(!isChanged);
+            }}
           />
           {/* ✅ 투두리스트 제목 */}
           <input
