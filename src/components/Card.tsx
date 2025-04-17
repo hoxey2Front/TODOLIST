@@ -9,7 +9,7 @@ export default function Card({ status, items }: CardProps) {
   const isDone = status === "done";
   const filteredItems = items?.filter(item => item.isCompleted === isDone).map(item => ({
     ...item,
-    name: item.name || "Unnamed Task", // Provide a default name if missing
+    name: item.name, // Provide a default name if missing
   })) || [];
 
   return (

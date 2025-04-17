@@ -160,6 +160,16 @@ export default function Test({ params }) {
             accept="image/*"
             onChange={e => {
               const file = e.target.files?.[0];
+              /* ✅ 이미지 파일 검사 */
+              const isFileNameValid = fileName => {
+                const forbiddenPattern = /[?&()=]/;
+                return !forbiddenPattern.test(fileName);
+              };
+              if (!isFileNameValid(file.name)) {
+                alert('파일 이름에 ?, &, (), = 같은 특수 문자는 사용할 수 없습니다.');
+                e.target.value = ''; // 파일 입력 초기화
+                return;
+              }
               if (file && file.size > 5 * 1024 * 1024) {
                 alert('파일 크기는 5MB 이하만 가능합니다.');
                 e.target.value = ''; // 파일 입력 초기화
@@ -173,7 +183,6 @@ export default function Test({ params }) {
                   return;
                 }
               }
-
               setCurrentImage(file);
               const reader = new FileReader();
               reader.onload = event => {
@@ -244,10 +253,14 @@ export default function Test({ params }) {
             disabled={!isChanged}
             onClick={() => {
               if (isChanged) {
+                if (!item.name) {
+                  alert('할 일 내용을 입력해주세요.');
+                }
                 setTodoItem(item.id, item.name, item.memo, item.imageUrl, item.isCompleted);
                 setIsChanged(false);
                 alert('수정되었습니다.');
                 router.push('/');
+                console.log(item.id, item.name, item.memo, item.imageUrl, item.isCompleted);
               }
             }}
           />

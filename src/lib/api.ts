@@ -68,7 +68,7 @@ export async function updateListItem(itemId: string, isCompleted: boolean): Prom
 export async function updateDetailItem(
   itemId: string,
   name: string | '',
-  memo: string | '',
+  memo: string,
   imageUrl: string | '',
   isCompleted: boolean
 ): Promise<Item> {
@@ -77,9 +77,9 @@ export async function updateDetailItem(
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      name,
-      memo,
-      imageUrl,
+      name: name || '',
+      memo: memo || '',
+      imageUrl: imageUrl || '',
       isCompleted: isCompleted,
     }),
   });
