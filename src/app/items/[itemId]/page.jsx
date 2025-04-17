@@ -1,4 +1,3 @@
-// 컴포넌트 맨 위에 추가
 'use client';
 
 import { useEffect, use, useState, useRef } from 'react';
@@ -6,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { addImage, deleteItem, getItem, updateDetailItem } from '@/lib/api';
 import useStore from '@/data/store';
 
-export default function Test({ params }) {
+export default function ItemDetail({ params }) {
   const { itemId } = use(params);
   const item = useStore(state => state.item);
   const toggleCompleted = useStore(state => state.toggleCompleted);

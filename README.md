@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo List_코드잇 스프린트
+제작자 : 장한옥(hoxey)<br />
+코드잇 스프린트 프론트엔드 단기심화 과정을 위한 과제 프로젝트입니다.
+##  👨‍💻 프로젝트 소개
+"할 일 목록을 관리하는 To Do 서비스"입니다.
+코드잇에서 제공하는 API를 활용하여 제작하였습니다.
 
-## Getting Started
+## 🕰 개발 기간 
+- 2025.04.07(월) ~ 04.12(토) + 연장 2일(수정요청)
+- breakpoint 지정 (mobile, tablet, pc)
+- theme 색상 지정
+- Nanum Square 폰트사용
 
-First, run the development server:
+## ⚙️ 기술스택 
+- Next.js, Typescript
+- Tailwincss
+- Zustand
+- Eslint, Prettier
+- Vercel
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 💻 주요기능
+- 반응형 웹 (mobile, tablet, pc)
+---
+할 일 목록 페이지( / )
+- 목록 조회 기능
+- 할 일 추가 기능
+- 할 일 상태(진행중, 완료) 변경 기능
+---
+할 일 상세 페이지(/items/{itemId})
+- 할 일 수정 기능
+- 메모 수정 기능
+- 이미지 추가 기능
+- 할 일 삭제 기능
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📃 사용방법
+배포주소(https://todolist-gamma-ten-25.vercel.app)
+1. 배포주소로 이동한다.
+2. 입력 창에 할 일 입력후, 우측 추가하기 버튼 또는 엔터키로 등록할 수 있다.
+3. 할 일 리스트의 좌측 체크박스를 클릭하여 할 일 상태(진행중, 완료)를 변경할 수 있다.
+4. 할 일 리스트 중 하나 클릭시 상세 페이지로 이동할 수 있다.
+5. 상세 페이지에서는 할 일의 제목, 상태, 이미지, 메모 등을 조회, 수정할수 있다.
+6. 내용이 바뀔시 수정완료 버튼이 활성화 되며, 클릭시 내용이 수정되고, 메인페이지로 이동한다.
+7. 삭제하기 버튼 클릭시 리스트에서 해당 할 일이, 지워지며, 메인페이지로 이동한다.
