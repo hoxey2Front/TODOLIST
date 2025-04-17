@@ -256,9 +256,6 @@ export default function ItemDetail({ params }) {
             disabled={!isChanged}
             onClick={() => {
               if (isChanged) {
-                if (!item.name) {
-                  alert('할 일 내용을 입력해주세요.');
-                }
                 setTodoItem(item.id, item.name, item.memo, item.imageUrl, item.isCompleted);
                 setIsChanged(false);
                 alert('수정되었습니다.');
